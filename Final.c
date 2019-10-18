@@ -2,7 +2,7 @@
 
 int main()
 {
-	int i, j, A[8], B[92][8], C[8][8], s, g, flag, end, c, k, l, m, issame, exit;
+	int i, j, A[8], B[92][8], C[8][8], s, g, flag, end, c, k, l, m, issame;
 
 	for (i = 0; i <= 7; i++)
 	{
@@ -122,12 +122,6 @@ int main()
 			}
 		}
 	}
-	exit = 0;
-	do
-	{
-		printf("Enter 1 to exit: ");
-		scanf("%d", &exit);
-	} while (exit == 0);
 
 	return 0;
 }
