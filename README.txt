@@ -1,4 +1,4 @@
-The Final.c is a c programm that generates all possible solutions for the 8 queens puzzle.
+The queens8.c is a c programm that generates all possible solutions for the 8 queens puzzle.
 I wrote it long time ago when i started learning C so it's not the best implementation.
 
 About the puzzle:
