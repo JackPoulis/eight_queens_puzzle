@@ -1,4 +1,4 @@
-The queens8.c is a c programm that generates all possible solutions for the 8 queens puzzle.
+The queens_puzzle.c is a c programm that generates all possible solutions for the 8 queens puzzle.
 
 About the puzzle:
 The puzzle takes place on a 8 by 8 chess board.
