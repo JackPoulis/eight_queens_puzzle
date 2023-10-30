@@ -1,7 +1,8 @@
 #include <stdio.h>
 
 int main()
-{
+{	
+	//Variables initialization
 	int i, j, A[8], B[92][8], C[8][8], col, row, flag, end, c, k, l, m, issame;
 
 	for (i = 0; i <= 7; i++)
@@ -17,6 +18,7 @@ int main()
 	row = 0;
 	end = 0;
 
+	//Find all solutions
 	do
 	{
 		flag = 1;
@@ -70,6 +72,7 @@ int main()
 		row++;
 	} while (end == 0);
 
+	//Check and remove mirrored solutions
 	for (k = 0; k <= 90; k++)
 	{
 		if (B[k][0] != 16)
@@ -108,6 +111,8 @@ int main()
 			}
 		}
 	}
+
+	//Print solution on stdout
 	for (i = 0; i <= 91; i++)
 	{
 		if (B[i][0] != 16)
