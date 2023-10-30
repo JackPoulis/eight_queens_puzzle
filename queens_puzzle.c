@@ -1,19 +1,24 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int main()
 {	
 	//Variables initialization
-	int i, j, A[8], B[92][8], C[8][8], col, row, flag, end, c, k, l, m, mirrored;
+	int i, j, A[8], B[92][8], C[8][8], col, row, flag, end, n_solution, k, l, m, mirrored;
 
-	for (i = 0; i <= 7; i++)
+	int* D[8];
+	for (i = 0; i < 8; i++)
+        D[i] = (int*)malloc(1 * sizeof(int));
+
+	for (i = 0; i < 8; i++)
 	{
 		A[i] = 16; //Queens initially are placed in the position 16 (out of the board)
-		for (j = 0; j <= 91; j++)
+		for (j = 0; j < 92; j++)
 		{
 			B[j][i] = 0;
 		}
 	}
-	c = 0;
+	n_solution = 0;
 	col = 0;
 	row = 0;
 	end = 0;
@@ -25,11 +30,11 @@ int main()
 
 		if ((row == 0) && (col == 8))
 		{
-			for (i = 0; i <= 7; i++)
+			for (i = 0; i < 8; i++)
 			{
-				B[c][i] = A[i];
+				B[n_solution][i] = A[i];
 			}
-			c++;
+			n_solution++;
 			col = col - 2;
 			row = A[col] + 1;
 			A[7] = 16;
@@ -43,7 +48,7 @@ int main()
 
 		if (col > 0)
 		{
-			for (i = 0; i <= (col - 1); i++)
+			for (i = 0; i < col; i++)
 			{
 				if ((row == A[i]) || (row == A[i] + (col - i)) || (row == A[i] - (col - i)))
 				{
@@ -73,11 +78,11 @@ int main()
 	} while (end == 0);
 
 	//Check and remove mirrored solutions
-	for (k = 0; k <= 90; k++)
+	for (k = 0; k < 91; k++)
 	{
 		if (B[k][0] != 16)
 		{
-			for (i = 0; i <= 7; i++)
+			for (i = 0; i < 8; i++)
 			{
 				C[0][i] = B[k][i];
 				C[1][7 - B[k][i]] = i;
@@ -90,10 +95,10 @@ int main()
 			}
 			for (l = 91; l > k; l--)
 			{
-				for (m = 1; m <= 7; m++)
+				for (m = 1; m < 8; m++)
 				{
 					mirrored = 1;
-					for (i = 0; i <= 7; i++)
+					for (i = 0; i < 8; i++)
 					{
 						if (B[l][i] != C[m][i])
 						{
@@ -102,7 +107,7 @@ int main()
 					}
 					if (mirrored == 1)
 					{
-						for (i = 0; i <= 7; i++)
+						for (i = 0; i < 8; i++)
 						{
 							B[l][i] = 16;
 						}
@@ -113,11 +118,11 @@ int main()
 	}
 
 	//Print solution on stdout
-	for (i = 0; i <= 91; i++)
+	for (i = 0; i < 92; i++)
 	{
 		if (B[i][0] != 16)
 		{
-			for (j = 0; j <= 7; j++)
+			for (j = 0; j < 8; j++)
 			{
 				printf("[%d] ", B[i][j]);
 				if (j == 7)
