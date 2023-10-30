@@ -2,7 +2,7 @@
 
 int main()
 {
-	int i, j, A[8], B[92][8], C[8][8], s, g, flag, end, c, k, l, m, issame;
+	int i, j, A[8], B[92][8], C[8][8], col, row, flag, end, c, k, l, m, issame;
 
 	for (i = 0; i <= 7; i++)
 	{
@@ -13,37 +13,37 @@ int main()
 		}
 	}
 	c = 0;
-	s = 0;
-	g = 0;
+	col = 0;
+	row = 0;
 	end = 0;
 
 	do
 	{
 		flag = 1;
 
-		if ((g == 0) && (s == 8))
+		if ((row == 0) && (col == 8))
 		{
 			for (i = 0; i <= 7; i++)
 			{
 				B[c][i] = A[i];
 			}
 			c++;
-			s = s - 2;
-			g = A[s] + 1;
+			col = col - 2;
+			row = A[col] + 1;
 			A[7] = 16;
 			A[6] = 16;
 		}
 
-		if ((s == 0) && (g == 8))
+		if ((col == 0) && (row == 8))
 		{
 			end = 1;
 		}
 
-		if (s > 0)
+		if (col > 0)
 		{
-			for (i = 0; i <= (s - 1); i++)
+			for (i = 0; i <= (col - 1); i++)
 			{
-				if ((g == A[i]) || (g == A[i] + (s - i)) || (g == A[i] - (s - i)))
+				if ((row == A[i]) || (row == A[i] + (col - i)) || (row == A[i] - (col - i)))
 				{
 					flag = 0;
 				}
@@ -54,20 +54,20 @@ int main()
 			flag = 1;
 		}
 
-		if (g == 8)
+		if (row == 8)
 		{
-			A[s] = 16;
-			s--;
-			g = A[s];
+			A[col] = 16;
+			col--;
+			row = A[col];
 		}
 		else if (flag == 1)
 		{
-			A[s] = g;
-			s++;
-			g = -1;
+			A[col] = row;
+			col++;
+			row = -1;
 		}
 
-		g++;
+		row++;
 	} while (end == 0);
 
 	for (k = 0; k <= 90; k++)
