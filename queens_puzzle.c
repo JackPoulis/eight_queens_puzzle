@@ -3,11 +3,11 @@
 int main()
 {	
 	//Variables initialization
-	int i, j, A[8], B[92][8], C[8][8], col, row, flag, end, c, k, l, m, issame;
+	int i, j, A[8], B[92][8], C[8][8], col, row, flag, end, c, k, l, m, mirrored;
 
 	for (i = 0; i <= 7; i++)
 	{
-		A[i] = 16;
+		A[i] = 16; //Queens initially are placed in the position 16 (out of the board)
 		for (j = 0; j <= 91; j++)
 		{
 			B[j][i] = 0;
@@ -92,15 +92,15 @@ int main()
 			{
 				for (m = 1; m <= 7; m++)
 				{
-					issame = 1;
+					mirrored = 1;
 					for (i = 0; i <= 7; i++)
 					{
 						if (B[l][i] != C[m][i])
 						{
-							issame = 0;
+							mirrored = 0;
 						}
 					}
-					if (issame == 1)
+					if (mirrored == 1)
 					{
 						for (i = 0; i <= 7; i++)
 						{
