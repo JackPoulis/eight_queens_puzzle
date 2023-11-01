@@ -6,10 +6,6 @@ int main()
 	//Variables initialization
 	int i, j, A[8], B[92][8], C[8][8], col, row, flag, end, n_solution, k, l, m, mirrored;
 
-	int* D[8];
-	for (i = 0; i < 8; i++)
-        D[i] = (int*)malloc(1 * sizeof(int));
-
 	for (i = 0; i < 8; i++)
 	{
 		A[i] = 16; //Queens initially are placed in the position 16 (out of the board)
@@ -117,7 +113,7 @@ int main()
 		}
 	}
 
-	//Print solution on stdout
+	// Print solution on stdout
 	for (i = 0; i < 92; i++)
 	{
 		if (B[i][0] != 16)
