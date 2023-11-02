@@ -3,25 +3,22 @@
 #include <stdbool.h>
 #include <unistd.h>
 
-int** generate_isometry_group(int a[]){
+int** iso_g;
+
+void generate_isometry_group(int a[]){
     int i;
-    int** c = (int**) malloc(8*sizeof(int*));
-    for (i = 0; i < 8; i++){
-        c[i] = (int*) malloc(8*sizeof(int));
-    }
     for (i = 0; i < 8; i++){
         /*Generate all possible versions of the solution "a"
 		with rotation and translation (isometry group) */
-        c[0][i] = a[i];
-        c[1][7 - a[i]] = i;
-        c[2][7 - i] = 7 - a[i];
-        c[3][a[i]] = 7 - i;
-        c[4][7 - i] = a[i];
-        c[5][i] = 7 - a[i];
-        c[6][7 - a[i]] = 7 - i;
-        c[7][a[i]] = i;
+        iso_g[0][i] = a[i];
+        iso_g[1][7 - a[i]] = i;
+        iso_g[2][7 - i] = 7 - a[i];
+        iso_g[3][a[i]] = 7 - i;
+        iso_g[4][7 - i] = a[i];
+        iso_g[5][i] = 7 - a[i];
+        iso_g[6][7 - a[i]] = 7 - i;
+        iso_g[7][a[i]] = i;
     }
-    return c;
 }
 
 bool identical(int a[], int b[]){
@@ -44,6 +41,10 @@ int main(){
     bool threat, end;
 
     int** B = (int**) malloc(sizeof(int*));
+	iso_g = (int**) malloc(8*sizeof(int*));
+	for (i = 0; i < 8; i++){
+		iso_g[i] = (int*) malloc(8*sizeof(int));
+	}
 
 	for (i = 0; i < 8; i++)
 	{
@@ -60,7 +61,7 @@ int main(){
 		if ((row == 0) && (col == 8)){ 
 
             //Check if the solution is unique****
-            int** iso_g = generate_isometry_group(A);
+            generate_isometry_group(A);
             bool discard = false;
             for (i=0;i<n_solution;i++){ //For each previous solutions
                 for (j=0;j<8;j++){ //For each of the current isometry solutions
@@ -119,10 +120,15 @@ int main(){
 	}
 
     //Free arrays
-    for (int i=0; i<n_solution; ++i) {
+    for (i=0; i<n_solution; ++i) {
         free(B[i]);
     }
     free(B);
+
+	for(i=0; i<8; i++){
+		free(iso_g[i]);
+	}
+	free(iso_g);
 
 	return 0;
 }
