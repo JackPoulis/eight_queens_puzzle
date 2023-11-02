@@ -39,7 +39,7 @@ bool identical(int a[], int b[]){
 int main(){	
 	//Variables initialization
 	int i, j, A[8], col, row, n_solution, k, l, m;
-    bool threat, end;
+    bool threat;
 
     int** B = (int**) malloc(sizeof(int*));
 	iso_g = (int**) malloc(8*sizeof(int*));
@@ -54,10 +54,9 @@ int main(){
 	n_solution = 0;
 	col = 0;
 	row = 0;
-	end = false;
 
 	//Find all solutions
-	do{
+	while (true){
         //If row is 0 column is 8 then a solution is found
 		if ((row == 0) && (col == 8)){ 
             generate_isometry_group(A);
@@ -91,8 +90,6 @@ int main(){
             }
 		}
 
-		if ((col == 0) && (row == 8)) end = true; //All possible solutions have been found 
-
         threat = false;
 		if (col > 0){
 			for (i = 0; i < col; i++){ //Check if position (col,row) is threatened
@@ -100,7 +97,11 @@ int main(){
 					threat = true;
 				}
 			}
-		}
+		}else if(A[0]==4){/*End if first position becomes 4
+            because all the solutions after that point will be 
+            non fundamental (horizontal reflection of an existing solution)*/
+            break;
+        }
 
 		if (row == 8){ //Dead end reached
 			A[col] = 16;
@@ -112,7 +113,7 @@ int main(){
 			row = -1; //Reset row variable
 		}
 		row++;
-	} while (end == false);
+	}
 
 	// Print solution on stdout
 	char c;
