@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <unistd.h>
 
-int** iso_g;
+int** iso_g; //Isometry group 2D array
 
 void generate_isometry_group(int a[]){
     int i;
@@ -22,6 +22,7 @@ void generate_isometry_group(int a[]){
 }
 
 bool identical(int a[], int b[]){
+	//Checks is two chess board solutions are identical
     int i;
     bool identical = true;
     for (i = 0; i < 8; i++){
@@ -59,13 +60,15 @@ int main(){
 	do{
         //If row is 0 column is 8 then a solution is found
 		if ((row == 0) && (col == 8)){ 
-
-            //Check if the solution is unique****
             generate_isometry_group(A);
-            bool discard = false;
-            for (i=0;i<n_solution;i++){ //For each previous solutions
+			/*All 8 possible rotations and reflections 
+			of a solution consist an isometry group*/
+            bool discard = false; //Flag to discard solution if not unique
+            for (i=0;i<n_solution;i++){ //For each previously found solution
                 for (j=0;j<8;j++){ //For each of the current isometry solutions
-                    if (identical(B[i],iso_g[j])){
+                    if (identical(B[i],iso_g[j])){ //Check if the solutions are identical
+						/*Identical solutions are considered two solutions 
+						that belong to the same isometry group*/
                         discard = true;
                         break;
                     }
@@ -73,7 +76,7 @@ int main(){
                 if(discard == true)break;
             }
 
-            if(discard == false){
+            if(discard == false){ //Save the unique solution
                 B = (int**)realloc(B, (n_solution+1) * sizeof(int*));
                 B[n_solution] = (int*) malloc(8 * sizeof(int));
                 for (i = 0; i < 8; i++){
@@ -92,7 +95,7 @@ int main(){
 
         threat = false;
 		if (col > 0){
-			for (i = 0; i < col; i++){ //Check if position is threatened
+			for (i = 0; i < col; i++){ //Check if position (col,row) is threatened
 				if ((row == A[i]) || (row == A[i] + (col - i)) || (row == A[i] - (col - i))){
 					threat = true;
 				}
@@ -119,7 +122,7 @@ int main(){
         printf("\n");
 	}
 
-    //Free arrays
+    //Free allocated memory
     for (i=0; i<n_solution; ++i) {
         free(B[i]);
     }
