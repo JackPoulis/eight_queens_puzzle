@@ -10,7 +10,8 @@ int** generate_isometry_group(int a[]){
         c[i] = (int*) malloc(8*sizeof(int));
     }
     for (i = 0; i < 8; i++){
-        //Generate all possible versions of the solution "a" with rotation and translation
+        /*Generate all possible versions of the solution "a"
+		with rotation and translation (isometry group) */
         c[0][i] = a[i];
         c[1][7 - a[i]] = i;
         c[2][7 - i] = 7 - a[i];
@@ -27,8 +28,8 @@ bool identical(int a[], int b[]){
     int i;
     bool identical = true;
     for (i = 0; i < 8; i++){
-        //If one position is different then the
-        //two arrays are different
+        /*If one position is different then the
+    	two arrays are different*/
         if (a[i] != b[i]){
             identical = false;
             break;
