@@ -115,9 +115,12 @@ int main(){
 	} while (end == false);
 
 	// Print solution on stdout
+	char c;
 	for (i = 0; i < n_solution; i++){
+		printf("%d: ",i+1);
         for (j = 0; j < 8; j++){
-            printf("[%d] ", B[i][j]);
+			c = j+65;
+            printf("[%c,%d] ",c,(B[i][j]+1));
         }
         printf("\n");
 	}
