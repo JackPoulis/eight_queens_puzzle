@@ -2,7 +2,7 @@ The queens_puzzle.c is a c programm that generates all fundamental solutions for
 
 About the puzzle:
 The purpose is to fit 8 queens chess pieces on the 8 by 8 chess board in a way that no two queens threaten each other.
-Wikipedia article: https://en.wikipedia.org/wiki/Eight_queens_puzzle
+[Wikipedia article](https://en.wikipedia.org/wiki/Eight_queens_puzzle)
  
 The output is a list of the 12 fundamental solutions using the chess coordinates system.
 
