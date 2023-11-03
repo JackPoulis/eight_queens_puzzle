@@ -22,7 +22,7 @@ void generate_isometry_group(int a[]){
 }
 
 bool identical(int a[], int b[]){
-	//Checks is two chess board solutions are identical
+	//Checks if solutions are identical
     int i;
     bool identical = true;
     for (i = 0; i < 8; i++){
@@ -62,7 +62,7 @@ int main(){
             generate_isometry_group(A);
 			/*All 8 possible rotations and reflections 
 			of a solution consist an isometry group*/
-            bool discard = false; //Flag to discard solution if not unique
+            bool discard = false; //Flag to discard solution if not fundamental
             for (i=0;i<n_solution;i++){ //For each previously found solution
                 for (j=0;j<8;j++){ //For each of the current isometry solutions
                     if (identical(B[i],iso_g[j])){ //Check if the solutions are identical
@@ -75,7 +75,7 @@ int main(){
                 if(discard == true)break;
             }
 
-            if(discard == false){ //Save the unique solution
+            if(discard == false){ //Save the fundamental solution
                 B = (int**)realloc(B, (n_solution+1) * sizeof(int*));
                 B[n_solution] = (int*) malloc(8 * sizeof(int));
                 for (i = 0; i < 8; i++){
@@ -115,7 +115,7 @@ int main(){
 		row++;
 	}
 
-	// Print solution on stdout
+	//Print solutions on stdout
 	char c;
 	for (i = 0; i < n_solution; i++){
 		printf("%d: ",i+1);
